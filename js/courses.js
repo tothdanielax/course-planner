@@ -6,17 +6,30 @@ const courseList = document.querySelector("#course-list");
 /* Table head row has index 0 */
 let runningIndex = 0;
 
-function deleteRowFromTableWithEmptyCells(table, row, exclude) {
-    if (!exclude) return;
+function deleteRowTableByClass(row, rowClasses, excludeClasses) {
+    if (!excludeClasses) return;
 
-    const rowCells = row.cells;
-    for (const cell of rowCells) {
+    const filteredArray = excludeClasses.includes("allEmpty") ? rowClasses : excludeClasses.filter(classValue => rowClasses.includes(classValue));
+
+    for (const excludeClass of filteredArray) {
+        const cell = row.querySelector(`.${excludeClass}`);
+
         if (!cell.innerText.trim()) {
-            /* Delete row (deleteRow() function dysfunc.) */
             row.innerHTML = "";
             return;
         }
     }
+}
+
+function getAllClassesFromRow(row) {
+    const rowCells = row.cells;
+    const classes = [];
+
+    for (const cell of rowCells) {
+        classes.push(cell.className);
+    }
+
+    return classes;
 }
 
 function addIndexToRow(row) {
