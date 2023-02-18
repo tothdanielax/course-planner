@@ -1,9 +1,11 @@
 "use strict";
 
-/* Selectors */
+/* Form selectors */
 const searchForm = document.querySelector("#search-form");
 const courseNameSearch = searchForm.querySelector("#course-name-search");
 const excludeEmpty = searchForm.querySelector("#exclude-empty");
+
+/* Extra selectors */
 const loadingSpinner = searchForm.querySelector("#loading-spinner");
 
 /* URL to fetch form from (POST) */

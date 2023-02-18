@@ -167,21 +167,21 @@ courseList.addEventListener('click', event => {
     if (event.target.tagName !== 'TD') return;
     const row = event.target.parentNode;
 
-    console.log(row)
-
-    // this highlighting is not dynamic, as if the user relists the courses, the highlighting will be lost (fix later)
     if (!row.classList.contains('table-success')) {
         row.classList.add('table-success');
+        addEventToCalendar(
+            row.id,
+            getCellByClass(row, 'course-name').innerText, //name
+            getCellByClass(row, 'course-teacher').innerText, //teacher
+            getCellByClass(row, 'course-time').innerText) //time
     } else {
         // was already in calendar, don't add again
         row.classList.remove('table-success');
-        return;
-
-        // TODO: remove from calendar
+        deleteEventFromCalendar(row.id);
     }
-
-    addEventToCalendar(
-        getCellByClass(row, 'course-name').innerText, //name
-        getCellByClass(row, 'course-teacher').innerText, //teacher
-        getCellByClass(row, 'course-time').innerText) //time
 });
+
+
+function highlightRow(row) {
+    row.classList.add('table-success');
+}

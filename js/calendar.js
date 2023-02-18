@@ -44,21 +44,6 @@ const calendar = new FullCalendar.Calendar(timeTable, {
     eventResizableFromStart: true,
 })
 
-/*
-calendar.set('eventDidMount', arg => {
-    const el = arg.el.querySelector('.fc-event-time');
-
-    const removeBtn = document.createElement('span');
-    removeBtn.classList.add('removebtn');
-    removeBtn.innerText = 'X';
-    el.appendChild(removeBtn);
-
-    removeBtn.addEventListener('click', () => {
-        arg.event.remove();
-    });
-});
-*/
-
 function addRemoveButton(arg) {
     const el = arg.el.querySelector('.fc-event-time');
     const removeBtn = document.createElement('span');
@@ -67,6 +52,10 @@ function addRemoveButton(arg) {
     el.appendChild(removeBtn);
 
     removeBtn.addEventListener('click', () => {
+        if (courseList.querySelector(`#${arg.event.id}`)) {
+            courseList.querySelector(`#${arg.event.id}`).classList.remove('table-success');
+        }
+
         arg.event.remove();
     });
 }
@@ -76,11 +65,12 @@ document.addEventListener('DOMContentLoaded', () => calendar.render());
 
 const daysOfWeek = ['Hétfo', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
 
-function addEventToCalendar(name, teacher, time) {
+function addEventToCalendar(rowID, name, teacher, time) {
     const tokens = time.split(' ');
     const timeTokens = tokens[1].split('-');
 
     calendar.addEvent({
+        id: rowID,
         title:
             `${name} -
             ${teacher}`,
@@ -88,6 +78,10 @@ function addEventToCalendar(name, teacher, time) {
         startTime: timeTokens[0],
         endTime: timeTokens[1]
     });
+}
+
+function deleteEventFromCalendar(id) {
+    calendar.getEventById(id).remove();
 }
 
 function getDay(day) {
