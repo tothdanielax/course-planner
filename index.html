@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Course Planner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body style="background-color: #fafafa">
+<div class="container shadow bg-body rounded">
+
+    <!-- Form -->
+    <div class="row justify-content-center p-3">
+        <div class="col-lg-5 bg-dark text-white p-3">
+            <form id="search-form">
+                <div class="form-group">
+                    <label for="course-name-search" class="form-label">Course name:</label>
+                    <input
+                            class="form-control"
+                            type="text"
+                            id="course-name-search"
+                            placeholder="Web development..."
+                    />
+                </div>
+
+
+                <div class="my-2" id="form-buttons">
+                    <button type="submit" class="btn btn-secondary me-1">Search</button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSearch"
+                            aria-expanded="false" aria-controls="collapseSearch">
+                        Filters
+                    </button>
+
+                    <div class="spinner-border align-middle" role="status" id="loading-spinner" hidden>
+                        <span class="sr-only"></span>
+                    </div>
+
+                </div>
+
+                <div class="collapse mt-3" id="collapseSearch">
+                    <div class="text-dark card card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <b>Exclude column: </b>
+                                    <div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="exclude-column-course-code">
+                                            <label class="form-check-label" for="exclude-column-course-code">
+                                                Code
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="exclude-column-course-name">
+                                            <label class="form-check-label" for="exclude-column-course-name">
+                                                Name
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="exclude-column-course-comment">
+                                            <label class="form-check-label" for="exclude-column-course-comment">
+                                                Comment
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <b>Exclude row with: </b>
+                                    <div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="exclude-empty">
+                                            <label class="form-check-label" for="exclude-empty">
+                                                Any empty field
+                                            </label>
+                                        </div>
+                                        <!--<div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="true"
+                                                   id="exclude-empty-date">
+                                            <label class="form-check-label" for="exclude-empty-teacher">
+                                                Date
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="true"
+                                                   id="exclude-empty-place">
+                                            <label class="form-check-label" for="exclude-empty-place">
+                                                Place
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="true"
+                                                   id="exclude-empty-group">
+                                            <label class="form-check-label" for="exclude-empty-group">
+                                                Group
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="true"
+                                                   id="exclude-empty-teacher">
+                                            <label class="form-check-label" for="exclude-empty-teacher">
+                                                Teacher
+                                            </label>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Listed courses -->
+    <div class="row justify-content-center mx-5 p-1">
+        <div id="course-list" class="col-lg-12 p-0"></div>
+    </div>
+
+    <!-- Time table -->
+    <div class="row justify-content-center mx-5 p-1">
+        <div id="time-table" class="col-lg-12 border border-dark rounded p-2"></div>
+    </div>
+</div>
+</div>
+
+<!-- Scripts -->
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<!-- FullCalendar JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.4/index.global.min.js"
+        crossorigin="anonymous"></script>
+<!-- Own JavaScript -->
+<script src="js/calendar.js"></script>
+<script src="js/courses.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>
