@@ -14,7 +14,7 @@
 
     <!-- Form -->
     <div class="row justify-content-center p-3">
-        <div class="col-lg-5 bg-dark text-white p-3">
+        <div class="col-lg-6 bg-dark text-white p-3">
             <form id="search-form">
                 <h1 class="text-center align-middle mt-1">Course Planner</h1>
                 <div class="form-group mt-4">
@@ -36,17 +36,21 @@
                         <fieldset class="mt-2" id="search-type">
                             <legend>Search for:</legend>
                             <div class="row ms-2">
-                                <div class="col-md-4 form-check">
-                                    <input class="form-check-input" type="radio" id="search-1" name="search-for" value="course-name" checked>
-                                    <label class="form-check-label" for="exclude-column-course-name">Name</label>
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
+                                    <input class="form-check-input" type="radio" id="keresnevre" name="search-for" value="keresnevre" checked>
+                                    <label class="form-check-label" for="keresnevre">Name</label>
                                 </div>
-                                <div class="col-md-4 form-check">
-                                    <input class="form-check-input" type="radio" id="search-2" name="search-for" value="course-code">
-                                    <label class="form-check-label" for="exclude-column-course-code">Code</label>
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
+                                    <input class="form-check-input" type="radio" id="keres_kod_azon" name="search-for" value="keres_kod_azon">
+                                    <label class="form-check-label" for="keres_kod_azon">Code</label>
                                 </div>
-                                <div class="col-md-4 form-check">
-                                    <input class="form-check-input" type="radio" id="search-3" name="search-for" value="course-teacher">
-                                    <label class="form-check-label" for="exclude-column-course-code">Teacher</label>
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
+                                    <input class="form-check-input" type="radio" id="keres_okt" name="search-for" value="keres_okt">
+                                    <label class="form-check-label" for="keres_okt">Teacher name</label>
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
+                                    <input class="form-check-input" type="radio" id="keres_oktnk" name="search-for" value="keres_oktnk">
+                                    <label class="form-check-label" for="keres_oktnk">Teacher code</label>
                                 </div>
                             </div>
                         </fieldset>
@@ -56,55 +60,55 @@
                             <input type="checkbox" value="unused" disabled hidden checked>
 
                             <div class="row ms-2">
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-name" value="course-name">
                                     <label class="form-check-label" for="exclude-column-course-name">Name</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-code" value="course-code">
                                     <label class="form-check-label" for="exclude-column-course-code">Code</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-time" value="course-time">
                                     <label class="form-check-label" for="exclude-column-course-time">Time</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-place" value="course-place">
                                     <label class="form-check-label" for="exclude-column-course-place">Place</label>
                                 </div>
                             </div>
                             <div class="row ms-2">
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-weeks" value="course-weeks" checked>
                                     <label class="form-check-label" for="exclude-column-course-type">Weeks</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-comment" value="course-comment" checked>
                                     <label class="form-check-label" for="exclude-column-course-comment">Comment</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-type" value="course-type">
                                     <label class="form-check-label" for="exclude-column-course-type">Type</label>
                                 </div>
-                                <div class="col-md-3 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-group" value="course-group">
                                     <label class="form-check-label" for="exclude-column-course-group">Group</label>
                                 </div>
                             </div>
                             <div class="row ms-2">
-                                <div class="col-md-3 form-check ">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check ">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-participants" value="course-part">
                                     <label class="form-check-label" for="exclude-column-course-participants">Participants</label>
                                 </div>
-                                <div class="col-md-3 form-check ">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check ">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-ea" value="course-ea" checked>
                                     <label class="form-check-label" for="exclude-column-course-ea">EA</label>
                                 </div>
-                                <div class="col-md-3 form-check ">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check ">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-gy" value="course-gy" checked>
                                     <label class="form-check-label" for="exclude-column-course-gy">GY</label>
                                 </div>
-                                <div class="col-md-3 form-check ">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check ">
                                     <input class="form-check-input" type="checkbox" id="exclude-column-course-teacher" value="course-teacher">
                                     <label class="form-check-label" for="exclude-column-course-teacher">Teacher</label>
                                 </div>
@@ -114,29 +118,27 @@
                         <fieldset class="mt-3" id="exclude-rows">
                             <legend>Exclude row with:</legend>
                             <div class="row ms-2">
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-empty-all" value="allEmpty" checked>
                                     <label class="form-check-label" for="exclude-empty-all" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Except course comments">Any empty field</label>
                                 </div>
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-empty-name" value="course-name">
                                     <label class="form-check-label" for="exclude-empty-name">Empty name</label>
                                 </div>
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" value="course-time" id="exclude-empty-time">
                                     <label class="form-check-label" for="exclude-empty-time">Empty time</label>
                                 </div>
-                            </div>
-                            <div class="row ms-2">
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" value="course-place" id="exclude-empty-place">
                                     <label class="form-check-label" for="exclude-empty-place">Empty place</label>
                                 </div>
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" value="course-group" id="exclude-empty-group">
                                     <label class="form-check-label" for="exclude-empty-group">Empty group</label>
                                 </div>
-                                <div class="col-md-4 form-check">
+                                <div class="col-sm-6 col-md-3 col-xs-12 form-check">
                                     <input class="form-check-input" type="checkbox" value="course-teacher" id="exclude-empty-teacher">
                                     <label class="form-check-label" for="exclude-empty-teacher">Empty teacher</label>
                                 </div>
