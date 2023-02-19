@@ -44,6 +44,10 @@ const calendar = new FullCalendar.Calendar(timeTable, {
     eventResizableFromStart: true,
 })
 
+/**
+ * Adds a remove button to the event
+ * @param arg - The event to add the button to
+ */
 function addRemoveButton(arg) {
     const el = arg.el.querySelector('.fc-event-time');
     const removeBtn = document.createElement('span');
@@ -65,6 +69,13 @@ document.addEventListener('DOMContentLoaded', () => calendar.render());
 
 const daysOfWeek = ['Hétfo', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
 
+/**
+ * Adds an event to the calendar
+ * @param rowID - The id of the row
+ * @param name - The name of the course
+ * @param teacher - The name of the teacher
+ * @param time - The time of the course
+ */
 function addEventToCalendar(rowID, name, teacher, time) {
     const tokens = time.split(' ');
     const timeTokens = tokens[1].split('-');
@@ -80,10 +91,19 @@ function addEventToCalendar(rowID, name, teacher, time) {
     });
 }
 
+/**
+ * Deletes an event from the calendar
+ * @param id - The id of the event to delete
+ */
 function deleteEventFromCalendar(id) {
     calendar.getEventById(id).remove();
 }
 
+/**
+ * Get the day of the week from the day name
+ * @param day - The day name
+ * @returns {string} - The day of the week
+ */
 function getDay(day) {
     return String(daysOfWeek.indexOf(day) + 1);
 }

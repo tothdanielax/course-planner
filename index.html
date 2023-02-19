@@ -16,11 +16,11 @@
     <div class="row justify-content-center p-3">
         <div class="col-lg-5 bg-dark text-white p-3">
             <form id="search-form">
-                <div class="form-group">
-                    <label for="course-name-search" class="form-label">Course name:</label>
-                    <input class="form-control" type="text" id="course-name-search" placeholder="Web development..." value="">
+                <h1 class="text-center align-middle mt-1">Course Planner</h1>
+                <div class="form-group mt-4">
+                    <input class="form-control" type="text" id="search-bar" placeholder="Search for something" value="">
                 </div>
-                <div class="my-2" id="form-buttons">
+                <div class="mt-3" id="form-buttons">
                     <button type="submit" class="btn btn-secondary me-1">Search</button>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#detailed-search" aria-expanded="false" aria-controls="detailed-search">
                         Filters
@@ -32,8 +32,27 @@
                 </div>
                 <div class="collapse mt-3" id="detailed-search">
                     <div class="text-dark card card-body">
-                        <div class="form-group" id="exclude-columns">
-                            <b>Exclude columns: </b>
+
+                        <fieldset class="mt-2" id="search-type">
+                            <legend>Search for:</legend>
+                            <div class="row ms-2">
+                                <div class="col-md-4 form-check">
+                                    <input class="form-check-input" type="radio" id="search-1" name="search-for" value="course-name" checked>
+                                    <label class="form-check-label" for="exclude-column-course-name">Name</label>
+                                </div>
+                                <div class="col-md-4 form-check">
+                                    <input class="form-check-input" type="radio" id="search-2" name="search-for" value="course-code">
+                                    <label class="form-check-label" for="exclude-column-course-code">Code</label>
+                                </div>
+                                <div class="col-md-4 form-check">
+                                    <input class="form-check-input" type="radio" id="search-3" name="search-for" value="course-teacher">
+                                    <label class="form-check-label" for="exclude-column-course-code">Teacher</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="mt-3" id="exclude-columns">
+                            <legend>Exclude columns:</legend>
                             <input type="checkbox" value="unused" disabled hidden checked>
 
                             <div class="row ms-2">
@@ -64,7 +83,7 @@
                                     <label class="form-check-label" for="exclude-column-course-comment">Comment</label>
                                 </div>
                                 <div class="col-md-3 form-check">
-                                    <input class="form-check-input" type="checkbox" id="exclude-column-course-type" value="course-comment">
+                                    <input class="form-check-input" type="checkbox" id="exclude-column-course-type" value="course-type">
                                     <label class="form-check-label" for="exclude-column-course-type">Type</label>
                                 </div>
                                 <div class="col-md-3 form-check">
@@ -74,7 +93,7 @@
                             </div>
                             <div class="row ms-2">
                                 <div class="col-md-3 form-check ">
-                                    <input class="form-check-input" type="checkbox" id="exclude-column-course-participants" value="course-participants">
+                                    <input class="form-check-input" type="checkbox" id="exclude-column-course-participants" value="course-part">
                                     <label class="form-check-label" for="exclude-column-course-participants">Participants</label>
                                 </div>
                                 <div class="col-md-3 form-check ">
@@ -90,14 +109,14 @@
                                     <label class="form-check-label" for="exclude-column-course-teacher">Teacher</label>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
 
-                        <div class="mt-2" id="exclude-rows">
-                            <b>Exclude row with: </b>
+                        <fieldset class="mt-3" id="exclude-rows">
+                            <legend>Exclude row with:</legend>
                             <div class="row ms-2">
                                 <div class="col-md-4 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-empty-all" value="allEmpty" checked>
-                                    <label class="form-check-label" for="exclude-empty-all">Any empty field</label>
+                                    <label class="form-check-label" for="exclude-empty-all" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Except course comments">Any empty field</label>
                                 </div>
                                 <div class="col-md-4 form-check">
                                     <input class="form-check-input" type="checkbox" id="exclude-empty-name" value="course-name">
@@ -122,7 +141,7 @@
                                     <label class="form-check-label" for="exclude-empty-teacher">Empty teacher</label>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
                     </div>
                 </div>
             </form>

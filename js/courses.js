@@ -3,13 +3,40 @@
 /* Selectors */
 const courseList = document.querySelector("#course-list");
 
-/* Table head row has index 0 */
-let runningIndex = 0;
+/**
+ * The current index of the row. Head row's index is 0.
+ * @type {number}
+ */
+let rowIndex = 0;
 
+/**
+ * Deletes a row from a table by class
+ * If the excludeClasses array contains "allEmpty", then the row will be deleted if any of the cells are empty.
+ * @param row - The row to check and delete if needed
+ * @param rowClasses - The classes of the row (available columns to work with)
+ * @param excludeClasses - The classes to exclude
+ *
+ * @example
+ * // Deletes the row if the cell with the class "name" is empty
+ * // Because the row has the class "course-name" the delete is valid
+ * deleteRowTableByClass(row, ["course-name", "course-time", "course-place"], ["course-name"]);
+ *
+ * @example
+ * // Does nothing because the row doesn't have the class "course-name"
+ * deleteRowTableByClass(row, ["course-time", "course-place"], ["course-name"]);
+ *
+ */
 function deleteRowTableByClass(row, rowClasses, excludeClasses) {
     if (!excludeClasses) return;
 
-    const filteredArray = excludeClasses.includes("allEmpty") ? rowClasses : excludeClasses.filter(classValue => rowClasses.includes(classValue));
+    let filteredArray = [];
+
+    if (excludeClasses.includes("allEmpty")) {
+        filteredArray = rowClasses;
+        if (filteredArray.includes("course-comment")) filteredArray.splice(filteredArray.indexOf("course-comment"), 1);
+    } else {
+        filteredArray = excludeClasses.filter(classValue => rowClasses.includes(classValue));
+    }
 
     for (const excludeClass of filteredArray) {
         const cell = row.querySelector(`.${excludeClass}`);
@@ -21,6 +48,11 @@ function deleteRowTableByClass(row, rowClasses, excludeClasses) {
     }
 }
 
+/**
+ * Gets all the classes from a row (available columns to work with)
+ * @param row - The row to get the classes from
+ * @returns {string[]} - The classes of the row
+ */
 function getAllClassesFromRow(row) {
     const rowCells = row.cells;
     const classes = [];
@@ -32,12 +64,19 @@ function getAllClassesFromRow(row) {
     return classes;
 }
 
+/**
+ * Adds an index to a row
+ * @param row - The row to add the index to
+ */
 function addIndexToRow(row) {
-    row.id = `row-${runningIndex}`;
-    runningIndex++;
+    row.id = `row-${rowIndex}`;
+    rowIndex++;
 }
 
-/* For css styling and easier selecting (deleting screws up simple indexing) */
+/**
+ * Adds classes to the cells of a row
+ * @param row - The row to add the classes to
+ */
 function addClassToRowCells(row) {
     const rowCells = row.cells;
 
@@ -54,9 +93,12 @@ function addClassToRowCells(row) {
     rowCells[10].classList.add("course-ea");
     rowCells[11].classList.add("course-gy");
     rowCells[12].classList.add("course-teacher");
-
 }
 
+/**
+ * Creates the table header and deletes the old one
+ * @param table - The table to create the header for
+ */
 function createTableHeader(table) {
     table.deleteRow(0)
 
@@ -116,55 +158,64 @@ function createTableHeader(table) {
     row.appendChild(courseEA);
     row.appendChild(courseGY);
     row.appendChild(courseTeacher);
-
-    return thead;
 }
 
-
-function createTableHeaderFromRow(table, row) {
-    const thead = table.createTHead();
-    thead.classList.add("table-dark");
-    const newRow = document.createElement("tr");
-
-    // change all td to th
-    for (let cell of row.cells) {
-        const th = document.createElement("th");
-        th.innerHTML = cell.innerHTML;
-        th.className = cell.className;
-        newRow.appendChild(th);
-    }
-
-
-    // delete first row of tbody (it's now copied to thead)
-    table.deleteRow(row.rowIndex);
-    thead.appendChild(newRow);
-}
-
-/* Do actions and calculations on row, like deleting. Parameters not used yet.  */
-function calculateRows(rows, deleteClasses) {
-    for (const row of rows) {
-        /* Change course type to EA or GY */
-        changeCourseType(getCellByClass(row, "course-type"));
-    }
-}
-
+/**
+ * Deletes all columns from a row by classes name,
+ * @param row - The row to delete the columns from
+ * @param classes - The classes of the columns to delete
+ *
+ * @example
+ * // Deletes the columns with the classes "course-name" and "course-time"
+ * // returns the row without the columns
+ * deleteColumnsByClass(row, ["course-name", "course-time"]);
+ */
 function deleteColumnsByClass(row, classes) {
-    classes = classes || ["unused", "course-weeks", "course-comment", "course-part", "course-ea", "course-gy"];
-
     for (const className of classes) {
         deleteCellByClass(row, className)
     }
 }
 
+function trimRowCells(row) {
+    const rowCells = row.cells;
+
+    for (const cell of rowCells) {
+        cell.innerText = cell.innerText.trim();
+    }
+}
+
+/**
+ * Get a cell by class name
+ * @param row - The row to get the cell from
+ * @param className - The class name of the cell
+ * @returns {Element} - The cell
+ *
+ * @example
+ * // Returns the cell with the class "course-name"
+ * getCellByClass(row, "course-name");
+ */
 function getCellByClass(row, className) {
     return row.querySelector(`.${className}`);
 }
 
+/**
+ * Deletes a cell from a row by class name
+ * @param row - The row to delete the cell from
+ * @param className - The class name of the cell to delete
+ *
+ * @example
+ * // Deletes the cell with the class "course-name"
+ * deleteCellByClass(row, "course-name");
+ */
 function deleteCellByClass(row, className) {
     const cell = row.querySelector(`.${className}`);
     row.deleteCell(cell.cellIndex);
 }
 
+/**
+ * Changes the course type to a more readable format (EA or GY)
+ * @param row - The row to change the course type in
+ */
 function changeCourseType(row) {
     const cell = getCellByClass(row, "course-type");
     if (cell.innerText === "gyakorlat") {
@@ -174,8 +225,9 @@ function changeCourseType(row) {
     }
 }
 
-
-// Add course to timetable
+/**
+ * On click, add a course to the timetable and highlight the row in course list
+ */
 courseList.addEventListener('click', event => {
     if (event.target.tagName !== 'TD') return;
     const row = event.target.parentNode;
@@ -193,8 +245,3 @@ courseList.addEventListener('click', event => {
         deleteEventFromCalendar(row.id);
     }
 });
-
-
-function highlightRow(row) {
-    row.classList.add('table-success');
-}
