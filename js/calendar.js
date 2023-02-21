@@ -1,8 +1,9 @@
 "use strict";
 
-
 /* Selectors */
-const timeTable = document.querySelector('#time-table')
+const timeTable = document.querySelector('#timetable');
+
+const daysOfWeek = ['Hétfo', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
 
 /* FullCalendar instance */
 const calendar = new FullCalendar.Calendar(timeTable, {
@@ -10,73 +11,72 @@ const calendar = new FullCalendar.Calendar(timeTable, {
     schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
     headerToolbar: {
         // Display nothing at the top
-        left: '', center: '', right: '',
+        left: '',
+        center: '',
+        right: '',
     },
     initialView: 'timeGridWeek',
     dayMinWidth: 150,
-    //stickyFooterScrollbar : true,
-    locale: 'hu', // magyar
-    allDaySlot: false, // all day off
+    locale: 'en',
+    allDaySlot: false,
     dayHeaderFormat: {
-        weekday: 'long', // hétfő, kedd..
+        weekday: 'long', // monday, tuesday, etc
     },
-    slotDuration: '00:30:00', // 30 minutes
-    weekends: false, // dont show weekends
-    slotMinTime: '7:00:00', // first time
-    slotMaxTime: '21:00:00', // last time
-    snapDuration: '00:15:00', // snap to 30 minutes
+    slotDuration: '00:30:00',
+    weekends: false,
+    slotMinTime: '7:00:00',
+    slotMaxTime: '21:00:00',
+    snapDuration: '00:15:00', // drag time
     slotLabelFormat: {
-        hour: '2-digit', // 06
-        minute: '2-digit', // 06
-        omitZeroMinute: false, // 6:00 is not 6
-        hour12: false, // 24:00 format
-    }, height: "auto", // set timetable height
+        hour: '2-digit',
+        minute: '2-digit',
+        omitZeroMinute: false,
+        hour12: false,
+    },
+    height: "auto",
     expandRows: true, // fix last row display
-    contentHeight: 'auto', // fix last row display
-    /* customButtons: {
-         addEventButton: {
-             text: 'Add custom event', click: function () {
-             }
-         }
-     },*/
-    eventDidMount: arg => addRemoveButton(arg),
+    contentHeight: 'auto',
+    eventDidMount: arg => addRemoveButton(arg), // fires when an event is added to the calendar
     editable: true,
     eventResizableFromStart: true,
 })
 
+/* Render calendar */
+document.addEventListener('DOMContentLoaded', () => calendar.render());
+
 /**
  * Adds a remove button to the event
+ *
  * @param arg - The event to add the button to
  */
 function addRemoveButton(arg) {
-    const el = arg.el.querySelector('.fc-event-time');
+    /* Create */
     const removeBtn = document.createElement('span');
     removeBtn.classList.add('removebtn');
     removeBtn.innerText = 'X';
-    el.appendChild(removeBtn);
 
     removeBtn.addEventListener('click', () => {
-        if (courseList.querySelector(`#${arg.event.id}`)) {
-            courseList.querySelector(`#${arg.event.id}`).classList.remove('table-success');
+        if (coursesTable.querySelector(`#${arg.event.id}`)) {
+            coursesTable.querySelector(`#${arg.event.id}`).classList.remove('table-success');
         }
 
         arg.event.remove();
     });
+
+    /* Append */
+    const timeRow = arg.el.querySelector('.fc-event-time');
+    timeRow.appendChild(removeBtn);
 }
-
-/* Render calendar */
-document.addEventListener('DOMContentLoaded', () => calendar.render());
-
-const daysOfWeek = ['Hétfo', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
 
 /**
  * Adds an event to the calendar
+ *
  * @param rowID - The id of the row
  * @param name - The name of the course
  * @param teacher - The name of the teacher
  * @param time - The time of the course
  */
-function addEventToCalendar(rowID, name, teacher, time) {
+function addEventToTimetable(rowID, name, teacher, time) {
     const tokens = time.split(' ');
     const timeTokens = tokens[1].split('-');
 
@@ -85,25 +85,28 @@ function addEventToCalendar(rowID, name, teacher, time) {
         title:
             `${name} -
             ${teacher}`,
-        daysOfWeek: [getDay(tokens[0])],
+        daysOfWeek: [getIndexOfDay(tokens[0])],
         startTime: timeTokens[0],
         endTime: timeTokens[1]
     });
 }
 
 /**
- * Deletes an event from the calendar
+ * Deletes an event from the calendar by event id
+ *
  * @param id - The id of the event to delete
  */
-function deleteEventFromCalendar(id) {
+function deleteEventById(id) {
     calendar.getEventById(id).remove();
 }
 
 /**
  * Get the day of the week from the day name
- * @param day - The day name
- * @returns {string} - The day of the week
+ *
+ * @param day - The name of the day
+ * @returns {number} - The index of the day in the daysOfWeek array (indexed from 1), weekends are not included.
+ * 0 if the day is not found.
  */
-function getDay(day) {
-    return String(daysOfWeek.indexOf(day) + 1);
+function getIndexOfDay(day) {
+    return daysOfWeek.indexOf(day) + 1;
 }
