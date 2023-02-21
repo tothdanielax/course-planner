@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="styles/style.css"/>
 </head>
 <body>
-<main class="container shadow rounded">
+<main class="container-fluid">
 
     <!-- Search Form -->
     <section class="d-print-none">
@@ -47,17 +47,17 @@
                             <div class="row ms-2" role="radiogroup">
                                 <!-- Course name -->
                                 <div class="col-md-4 col-sm-12 form-check">
-                                    <input id="search-type-keresnevre" class="form-check-input" type="radio" role="radio" value="keresnevre" checked>
+                                    <input id="search-type-keresnevre" class="form-check-input" type="radio" role="radio" name="search-type" value="keresnevre" checked>
                                     <label class="form-check-label" for="search-type-keresnevre">Course name</label>
                                 </div>
                                 <!-- Course code -->
                                 <div class="col-md-4 col-sm-12 form-check">
-                                    <input id="search-type-keres_kod_azon" class="form-check-input" type="radio" role="radio" value="keres_kod_azon">
+                                    <input id="search-type-keres_kod_azon" class="form-check-input" type="radio" role="radio" name="search-type" value="keres_kod_azon">
                                     <label class="form-check-label" for="search-type-keres_kod_azon">Course code</label>
                                 </div>
                                 <!-- Teacher name -->
                                 <div class="col-md-4 col-sm-12 form-check">
-                                    <input id="search-type-keres_okt" class="form-check-input" type="radio" role="radio" value="keres_okt">
+                                    <input id="search-type-keres_okt" class="form-check-input" type="radio" role="radio" name="search-type" value="keres_okt">
                                     <label class="form-check-label" for="search-type-keres_okt">Teacher name</label>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     <label class="form-check-label" for="exclude-column-course-weeks">Weeks</label>
                                 </div>
                                 <div class="col-md-3 col-sm-6 col-xs-12 form-check">
-                                    <input id="exclude-column-course-comment" class="form-check-input" type="checkbox" value="course-comment" checked>
+                                    <input id="exclude-column-course-comment" class="form-check-input" type="checkbox" value="course-comment">
                                     <label class="form-check-label" for="exclude-column-course-comment">Comment</label>
                                 </div>
                                 <div class="col-md-3 col-sm-6 col-xs-12 form-check">
