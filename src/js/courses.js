@@ -30,6 +30,7 @@ coursesTable.addEventListener('click', event => {
         addEventToTimetable(
             clickedRow.id,
             getElementByClass(clickedRow, 'course-name').innerText,
+            getElementByClass(clickedRow, 'course-group').innerText,
             getElementByClass(clickedRow, 'course-teacher').innerText,
             getElementByClass(clickedRow, 'course-date').innerText
         );
